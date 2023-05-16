@@ -16,7 +16,7 @@ int main()
     int etwo[9] = { 0 };
     int ytwo[9] = { 0 };
     int q = 2;
-    int f = 0, a = 0, b = 0, c = 0, d = 0, e = 0, y;
+    int fl = 0, al = 0, bl = 0, cl = 0, dl = 0, el = 0, yl;
     int f10 = 0, a10 = 0, b10 = 0, c10 = 0, d10 = 0, e10 = 0, y10;
     char A[SIZE] = "+84", B[SIZE] = "-21", C[SIZE] = "-12", D[SIZE] = "+22", E[SIZE] = "+10";
     printf("Функция: y=a/b*c-d+e");
