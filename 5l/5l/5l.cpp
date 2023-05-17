@@ -16,9 +16,26 @@ int main()
     int etwo[9] = { 0 };
     int ytwo[9] = { 0 };
     int q = 2;
-    int f = 0, a = 0, b = 0, c = 0, d = 0, e = 0, y;
-    int f10 = 0, a10 = 0, b10 = 0, c10 = 0, d10 = 0, e10 = 0, y10;
-    char A[SIZE] = "+84", B[SIZE] = "-21", C[SIZE] = "-12", D[SIZE] = "+22", E[SIZE] = "+10";
+    int f = 0;
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    int d = 0;
+    int e = 0;
+    int y;
+    int f10 = 0;
+    int a10 = 0;
+    int b10 = 0;
+    int c10 = 0;
+    int d10 = 0;
+    int e10 = 0;
+    int y10;
+    //объявление строк
+    char A[SIZE] = "+84"; 
+    char B[SIZE] = "-21";
+    char C[SIZE] = "-12";
+    char D[SIZE] = "+22";
+    char E[SIZE] = "+10";
     printf("Функция: y=a/b*c-d+e");
 
     _asm
