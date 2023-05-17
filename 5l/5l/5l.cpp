@@ -1,4 +1,4 @@
-п»ї#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <Windows.h>
 #include <stdio.h>
 #include <locale.h>
@@ -7,8 +7,8 @@
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    int izm[SIZE] = { 0 }; //РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ С‡РёСЃР»Р° РІ РђРЎРљР РєРѕРґРµ
-    int resh[SIZE - 1] = { 0 }; //С‡РёСЃР»Рѕ РІ 10СЃСЃ
+    int izm[SIZE] = { 0 }; //представление числа в АСКИ коде
+    int resh[SIZE - 1] = { 0 }; //число в 10сс
     int atwo[9] = { 0 };
     int btwo[9] = { 0 };
     int ctwo[9] = { 0 };
@@ -19,7 +19,27 @@ int main()
     int fl = 0, al = 0, bl = 0, cl = 0, dl = 0, el = 0, yl;
     int f10 = 0, a10 = 0, b10 = 0, c10 = 0, d10 = 0, e10 = 0, y10;
     char A[SIZE] = "+84", B[SIZE] = "-21", C[SIZE] = "-12", D[SIZE] = "+22", E[SIZE] = "+10";
-    printf("Р¤СѓРЅРєС†РёСЏ: y=a/b*c-d+e");
+    int f = 0;
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    int d = 0;
+    int e = 0;
+    int y;
+    int f10 = 0;
+    int a10 = 0;
+    int b10 = 0;
+    int c10 = 0;
+    int d10 = 0;
+    int e10 = 0;
+    int y10;
+    //объявление строк
+    char A[SIZE] = "+84"; 
+    char B[SIZE] = "-21";
+    char C[SIZE] = "-12";
+    char D[SIZE] = "+22";
+    char E[SIZE] = "+10";
+    printf("Функция: y=a/b*c-d+e");
 
     _asm
     {
@@ -47,19 +67,19 @@ int main()
 
             ret
 
-            //РёР· СЃС‚СЂРѕРєРё РђРЎРљР РІ РїРµСЂРµРјРµРЅРЅСѓСЋ
-            TO_ASРЎII :
+            //из строки АСКИ в переменную
+            TO_ASСII :
         push ebx
             mov f, 0
-            //Р’ РђРЎРљР
+            //В АСКИ
             mov ecx, SIZE-1
             xor edx, edx
-            V_ASРЎII :
+            V_ASСII :
         movzx eax, [ebx + edx]
             mov[izm + 4 * edx], eax
             add edx, 1
-            LOOP V_ASРЎII
-            //Р’ С‡РёСЃР»Рѕ 10СЃСЃ
+            LOOP V_ASСII
+            //В число 10сс
             mov ecx, SIZE-1
             sub ecx, 1
             xor edx, edx
@@ -69,7 +89,7 @@ int main()
             mov[resh + 4 * edx], eax
             add edx, 1
             LOOP VMASSIV
-            //Р’ РїРµСЂРµРјРµРЅРЅСѓСЋ
+            //В переменную
             mov ecx, SIZE-1
             sub ecx, 1
             xor edx, edx
@@ -83,7 +103,7 @@ int main()
         imul eax, 10
             LOOP DESET
             NOL :
-        push eax  //РЅР° СЃРєРѕР»СЊРєРѕ СѓРјРЅРѕР¶РёС‚СЊ
+        push eax  //на сколько умножить
             mov ecx, ebx
             mov eax, [resh + 4 * edx]
             pop ebx
@@ -92,7 +112,7 @@ int main()
             add edx, 1
             LOOP PEREM
             mov eax, f
-            //РћРїСЂРµРґРµР»РµРЅРёРµ Р·РЅР°РєР°
+            //Определение знака
             cmp[izm], 45
             jne NE_MINUSOM
             neg eax
@@ -100,8 +120,8 @@ int main()
         pop ebx
             ret
 
-            ASРЎBIN :
-        //РџРµСЂРµРІРѕРґ РІРѕ 2СЃСЃ
+            ASСBIN :
+        //Перевод во 2сс
         push ebx
             mov eax, f
             xor edx, edx
@@ -124,8 +144,8 @@ int main()
             EXT :
             ret
 
-            BINASРЎ :
-        //РџРµСЂРµРІРѕРґ РІ 10СЃСЃ
+            BINASС :
+        //Перевод в 10сс
         mov f10, 0
             mov ecx, 8
             V_DEC :
@@ -149,46 +169,46 @@ int main()
             START :
 
         lea ebx, A
-            call TO_ASРЎII
+            call TO_ASСII
             mov a, eax
             lea ebx, atwo
-            call ASРЎBIN
-            call BINASРЎ
+            call ASСBIN
+            call BINASС
             mov a10, eax
 
             lea ebx, B
-            call TO_ASРЎII
+            call TO_ASСII
             mov b, eax
             lea ebx, btwo
-            call ASРЎBIN
-            call BINASРЎ
+            call ASСBIN
+            call BINASС
             mov b10, eax
 
             lea ebx, C
-            call TO_ASРЎII
+            call TO_ASСII
             mov c, eax
             lea ebx, ctwo
-            call ASРЎBIN
-            call BINASРЎ
+            call ASСBIN
+            call BINASС
             mov c10, eax
 
             lea ebx, D
-            call TO_ASРЎII
+            call TO_ASСII
             mov d, eax
             lea ebx, dtwo
-            call ASРЎBIN
-            call BINASРЎ
+            call ASСBIN
+            call BINASС
             mov d10, eax
 
             lea ebx, E
-            call TO_ASРЎII
+            call TO_ASСII
             mov e, eax
             lea ebx, etwo
-            call ASРЎBIN
-            call BINASРЎ
+            call ASСBIN
+            call BINASС
             mov e10, eax
 
-            //Р’С‹С‡РёСЃР»РµРЅРёРµ С„СѓРЅРєС†РёРё
+            //Вычисление функции
             push e
             push d
             push c
@@ -199,8 +219,8 @@ int main()
             mov f, eax
             mov y, eax
             lea ebx, ytwo
-            call ASРЎBIN
-            call BINASРЎ
+            call ASСBIN
+            call BINASС
             mov y10, eax
 
       
@@ -215,7 +235,7 @@ int main()
     {
         printf("\na10 = %d", a10);
     }
-    printf("\nР§РёСЃР»Рѕ РІРѕ 2СЃСЃ(nast): ");
+    printf("\nЧисло во 2сс(nast): ");
     if (atwo[0] == 45)
     {
         printf("-");
@@ -238,7 +258,7 @@ int main()
     {
         printf("\nb10 = %d", b10);
     }
-    printf("\nР§РёСЃР»Рѕ РІРѕ 2СЃСЃ(nast): ");
+    printf("\nЧисло во 2сс(nast): ");
     if (btwo[0] == 45)
     {
         printf("-");
@@ -261,7 +281,7 @@ int main()
     {
         printf("\nc10 = %d", c10);
     }
-    printf("\nР§РёСЃР»Рѕ РІРѕ 2СЃСЃ(nast): ");
+    printf("\nЧисло во 2сс(nast): ");
     if (ctwo[0] == 45)
     {
         printf("-");
@@ -284,7 +304,7 @@ int main()
     {
         printf("\nd10 = %d", d10);
     }
-    printf("\nР§РёСЃР»Рѕ РІРѕ 2СЃСЃ(nast): ");
+    printf("\nЧисло во 2сс(nast): ");
     if (dtwo[0] == 45)
     {
         printf("-");
@@ -307,7 +327,7 @@ int main()
     {
         printf("\ne10 = %d", e10);
     }
-    printf("\nР§РёСЃР»Рѕ РІРѕ 2СЃСЃ(nast): ");
+    printf("\nЧисло во 2сс(nast): ");
     if (etwo[0] == 45)
     {
         printf("-");
@@ -330,7 +350,7 @@ int main()
     {
         printf("\ny10 = %d", y10);
     }
-    printf("\nР§РёСЃР»Рѕ РІРѕ 2СЃСЃ(nast): ");
+    printf("\nЧисло во 2сс(nast): ");
     if (ytwo[0] == 45)
     {
         printf("-");
